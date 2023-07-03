@@ -5,7 +5,7 @@ module "auto_scaling_group" {
   pub_sub2_id          = module.network_flow.pub_sub2_id
   lt_asg_ami           = "ami-06b09bfacae1453cb"
   lt_asg_instance_type = "t2.micro"
-  lt_asg_key           = "IAMkeypair"
+  lt_asg_key           = "week22"
   script_name          = "install-apache.sh"
   asg_sg_id            = module.network_flow.asg_sg_id
   alb_tg_arn           = module.load_balancer.alb_tg_arn
