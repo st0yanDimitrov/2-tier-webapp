@@ -10,7 +10,7 @@ module "auto_scaling_group" {
   asg_launch_template_name               = format("%s-launch-template", var.application_name)
   asg_launch_template_ami                = "ami-06b09bfacae1453cb"
   asg_security_group_id                  = module.network_flow.asg_security_group_id
-  user_data_script_name                  = "install-apache.sh"
+  user_data_script_name                  = "setup-script.sh"
   public_subnet_ids                      = [module.network_flow.public_subnet1_id, module.network_flow.public_subnet2_id]
   load_balancer_target_group_arn         = module.load_balancer.lb_target_group_arn
   
