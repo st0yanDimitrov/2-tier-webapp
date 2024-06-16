@@ -7,10 +7,6 @@ resource "aws_route_table" "pub_rt" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
   }
-
-  tags = {
-    Name = var.public_route_table_name
-  }
 }
 
 # Creates a private route table with a default route to the NAT gateway
@@ -20,10 +16,6 @@ resource "aws_route_table" "priv_rt" {
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_nat_gateway.ngw.id
-  }
-
-  tags = {
-    Name = var.private_route_table_name
   }
 }
 

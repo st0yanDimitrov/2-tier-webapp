@@ -16,11 +16,6 @@ variable "lb_security_group_id" {
   description = "Load balancer security group ID"
 }
 
-variable "lb_tag_value" {
-  type    = string
-  description = "Public subnet load balancer Name tag value"
-}
-
 variable "lb_target_group_vpc_id" {
   type = string
   description = "Load balancer VPC ID"

@@ -97,11 +97,6 @@ variable "lb_security_group_name" {
   description = "Load balancer security group name"
 }
 
-variable "lb_security_group_tag_name" {
-  type    = string
-  description = "Load balancer security group tag Name value"
-}
-
 #####################################
 #ASG & Database Security Group Variables
 #####################################

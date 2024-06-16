@@ -5,15 +5,9 @@ resource "aws_autoscaling_group" "asg" {
   max_size            = var.asg_max_hosts
   desired_capacity    = var.asg_desired_capacity
   vpc_zone_identifier = var.public_subnet_ids
+  health_check_type   = var.asg_health_check_type
   launch_template {
     id = aws_launch_template.lt_asg.id
-  }
-
-  # Tag the autoscaling group for easier identification
-  tag {
-    key                 = "Name"
-    value               = var.asg_tag_name_value
-    propagate_at_launch = true
   }
 }
 

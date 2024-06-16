@@ -1,12 +1,12 @@
 # Instance Module
 module "auto_scaling_group" {
   source                                 = "./modules/ec2_auto_scaling"
-  asg_name                               = var.application_name
-  asg_instance_type                      = "t2.micro"
+  asg_name                               = format("%s-asg", var.application_name)
+  asg_instance_type                      = var.ec2_instances_type
   asg_min_hosts                          = 2
   asg_max_hosts                          = 6
   asg_desired_capacity                   = 2
-  asg_tag_name_value                     = var.application_name
+  asg_health_check_type                  = "ELB"
   asg_launch_template_name               = format("%s-launch-template", var.application_name)
   asg_launch_template_ami                = "ami-06b09bfacae1453cb"
   asg_security_group_id                  = module.network_flow.asg_security_group_id
@@ -24,8 +24,7 @@ module "auto_scaling_group" {
 # Load Balancer Module
 module "load_balancer" {
   source                                 = "./modules/load_balancer"
-  lb_name                                = format("%s-public-lb", var.application_name)
-  lb_tag_value                           = format("%s-public-lb", var.application_name)
+  lb_name                                = format("%s-lb", var.application_name)
   lb_public_subnet_ids                   = [module.network_flow.public_subnet1_id, module.network_flow.public_subnet2_id]
   lb_security_group_id                   = module.network_flow.lb_security_group_id
   lb_health_check_interval               = 60
@@ -64,7 +63,6 @@ module "network_flow" {
   internet_gateway_name                  = format("%s-internet-gateway", var.application_name)
   nat_gateway_name                       = format("%s-nat-gateway", var.application_name)
   lb_security_group_name                 = format("%s-security-group", var.application_name)
-  lb_security_group_tag_name             = format("%s-lb-security-group", var.application_name)
   asg_security_group_name                = format("%s-asg", var.application_name)
   db_security_group_name                 = format("%s-target-group", var.application_name)
 
@@ -81,7 +79,7 @@ module "database" {
   db_storage_type                        = "gp2"
   db_engine                              = "mysql"
   db_engine_version                      = "8.0.35"
-  db_instance_class                      = "db.t3.micro"
+  db_instance_class                      = var.db_instance_type
   db_vpc_security_group_ids              = [module.network_flow.db_security_group_id]
   db_parameter_group_name                = "default.mysql8.0"
   db_name                                = var.db_name

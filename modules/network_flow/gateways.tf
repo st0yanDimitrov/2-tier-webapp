@@ -1,10 +1,6 @@
 # Create an internet gateway and associate it with the VPC
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
-
-  tags = {
-    Name = var.internet_gateway_name
-  }
 }
 
 # Create an Elastic IP address

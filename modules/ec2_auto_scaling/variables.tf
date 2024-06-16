@@ -21,14 +21,14 @@ variable "asg_desired_capacity" {
   description = "Desired number of hosts in the auto scaling group"
 }
 
+variable "asg_health_check_type" {
+  type        = string
+  description = "Sets health check type for auto scaling group"
+}
+
 variable "public_subnet_ids" {
   type = list(string)
   description = "List of public subnets"
-}
-
-variable "asg_tag_name_value" {
-  type    = string
-  description = "Name tag value of the auto scaling group"
 }
 
 #Launch Template

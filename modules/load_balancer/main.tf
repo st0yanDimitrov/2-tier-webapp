@@ -8,10 +8,6 @@ resource "aws_lb" "lb" {
   name            = var.lb_name
   subnets         = var.lb_public_subnet_ids
   security_groups = [var.lb_security_group_id]
-
-  tags = {
-    Name          = var.lb_tag_value
-  }
 }
 
 # Create a target group for the load balancer
