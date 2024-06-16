@@ -387,8 +387,10 @@ terraform apply
 | <a name="input_db_instance_type"></a> [db\_instance\_type](#input\_db\_instance\_type) | Here specify the desired RDS instance type | `string` | `"db.t3.micro"` | no |
 | <a name="input_db_name"></a> [db\_name](#input\_db\_name) | Here specify the application database name | `string` | `"sampledb"` | no |
 | <a name="input_db_username"></a> [db\_username](#input\_db\_username) | Here specify the application database username | `string` | `"dbuser"` | no |
-| <a name="input_ec2_instances_type"></a> [ec2\_instances\_type](#input\_ec2\_instances\_type) | Here specify the desired EC2 instance type | `string` | `"t2.micro"` | no |
-| <a name="input_minimum_hosts"></a> [minimum\_hosts](#input\_minimum\_hosts) | n/a | `any` | n/a | yes |
+| <a name="input_desired_hosts_count"></a> [desired\_hosts\_count](#input\_desired\_hosts\_count) | Initial count of the serving hosts upon creation of the app | `number` | `2` | no |
+| <a name="input_ec2_instances_type"></a> [ec2\_instances\_type](#input\_ec2\_instances\_type) | Here specify the desired EC2 instance type for the serving hosts | `string` | `"t2.micro"` | no |
+| <a name="input_maximum_hosts_count"></a> [maximum\_hosts\_count](#input\_maximum\_hosts\_count) | Maximum count of the serving hosts | `number` | `4` | no |
+| <a name="input_minimum_hosts_count"></a> [minimum\_hosts\_count](#input\_minimum\_hosts\_count) | Minimum count of the serving hosts | `number` | `2` | no |
 
 ## Outputs
 

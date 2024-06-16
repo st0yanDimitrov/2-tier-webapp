@@ -3,9 +3,9 @@ module "auto_scaling_group" {
   source                                 = "./modules/ec2_auto_scaling"
   asg_name                               = format("%s-asg", var.application_name)
   asg_instance_type                      = var.ec2_instances_type
-  asg_min_hosts                          = 2
-  asg_max_hosts                          = 6
-  asg_desired_capacity                   = 2
+  asg_min_hosts                          = var.minimum_hosts_count
+  asg_max_hosts                          = var.maximum_hosts_count
+  asg_desired_capacity                   = var.desired_hosts_count
   asg_health_check_type                  = "ELB"
   asg_launch_template_name               = format("%s-launch-template", var.application_name)
   asg_launch_template_ami                = "ami-06b09bfacae1453cb"

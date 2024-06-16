@@ -29,11 +29,25 @@ variable "az_2" {
 variable "ec2_instances_type" {
   type = string
   default = "t2.micro"
-  description = "Here specify the desired EC2 instance type"
+  description = "Here specify the desired EC2 instance type for the serving hosts"
 }
 
-variable "minimum_hosts" {
-  
+variable "minimum_hosts_count" {
+  type = number
+  default = 2
+  description = "Minimum count of the serving hosts"
+}
+
+variable "desired_hosts_count" {
+  type = number
+  default = 2
+  description = "Initial count of the serving hosts upon creation of the app"
+}
+
+variable "maximum_hosts_count" {
+  type = number
+  default = 4
+  description = "Maximum count of the serving hosts"
 }
 
 variable "db_instance_type" {
