@@ -4,7 +4,8 @@
 This document outlines the infrastructure deployment for a 2-tier web application on AWS using Terraform. The architecture consists of:
 
 ### Web Tier: 
-Running a PHP web application on EC2 instances.
+Running a simple PHP web application on EC2 instances.
+
 The web application is deployed to the EC2 instance via user data script.
 ### Application Load Balancer (ALB): 
 Distributes traffic across the EC2 instances in the web tier.
