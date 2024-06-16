@@ -398,3 +398,9 @@ The setup can be further customized by intorducing changes in the other files.
 |------|-------------|
 | <a name="output_alb-dns"></a> [alb-dns](#output\_alb-dns) | n/a |
 <!-- END_TF_DOCS -->
+
+
+## Credits:
+https://github.com/Dibaal/Dibaalweek22-2-tier-architecture-main
+https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateWebServer.html
+https://gemini.google.com/
