@@ -347,3 +347,52 @@ terraform plan
 terraform apply
 ```
 
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_random"></a> [random](#provider\_random) | 3.6.2 |
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_auto_scaling_group"></a> [auto\_scaling\_group](#module\_auto\_scaling\_group) | ./modules/ec2_auto_scaling | n/a |
+| <a name="module_database"></a> [database](#module\_database) | ./modules/database | n/a |
+| <a name="module_load_balancer"></a> [load\_balancer](#module\_load\_balancer) | ./modules/load_balancer | n/a |
+| <a name="module_network_flow"></a> [network\_flow](#module\_network\_flow) | ./modules/network_flow | n/a |
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [random_password.password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_application_name"></a> [application\_name](#input\_application\_name) | Here add the desired name of your application | `string` | `"mysql-php-webapp"` | no |
+| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | Here add the desired AWS region | `string` | `"us-east-1"` | no |
+| <a name="input_az_1"></a> [az\_1](#input\_az\_1) | Here specify the first availability zone within the configured region | `string` | `"us-east-1a"` | no |
+| <a name="input_az_2"></a> [az\_2](#input\_az\_2) | Here specify the second availability zones within the configured region | `string` | `"us-east-1b"` | no |
+| <a name="input_db_instance_type"></a> [db\_instance\_type](#input\_db\_instance\_type) | Here specify the desired RDS instance type | `string` | `"db.t3.micro"` | no |
+| <a name="input_db_name"></a> [db\_name](#input\_db\_name) | Here specify the application database name | `string` | `"sampledb"` | no |
+| <a name="input_db_username"></a> [db\_username](#input\_db\_username) | Here specify the application database username | `string` | `"dbuser"` | no |
+| <a name="input_ec2_instances_type"></a> [ec2\_instances\_type](#input\_ec2\_instances\_type) | Here specify the desired EC2 instance type | `string` | `"t2.micro"` | no |
+| <a name="input_minimum_hosts"></a> [minimum\_hosts](#input\_minimum\_hosts) | n/a | `any` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_alb-dns"></a> [alb-dns](#output\_alb-dns) | n/a |
+<!-- END_TF_DOCS -->
