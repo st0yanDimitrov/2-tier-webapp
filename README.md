@@ -34,39 +34,6 @@ Multi-AZ MySQL RDS instance for high availability.
 * ALB Health Checks: The ALB continuously monitors the health of web servers. If a server becomes unhealthy, the ALB removes it from the traffic distribution until it recovers.
 * Auto Scaling Group: The ASG automatically replaces unhealthy instances with new ones, ensuring continuous application availability.
 
-## File structure
-```
-root/
-├── main.tf
-├── variales.tf
-├── outputs.tf
-├── providers.tf
-├── random.tf
-├── install-apache.sh
-└── modules/
-    ├── database/
-    │   ├── variables.tf
-    │   ├── outputs.tf
-    │   └── main.tf
-    ├── ec2_auto_scaling/
-    │   ├── variables.tf
-    │   ├── outputs.tf
-    │   └── main.tf
-    ├── load_balancer/
-    │   ├── variables.tf
-    │   ├── outputs.tf
-    │   └── main.tf
-    └── network_flow/
-        ├── variables.tf
-        ├── outputs.tf
-        ├── route-tables.tf
-        ├── security-groups.tf
-        ├── gataways
-        └── vpc.tf
-```
-The basic configuration is done in the variables.tf file in the root directory.
-The setup can be further customized by intorducing changes in the other files. 
-
 ## How to deploy:
 
 ### Prerequisites:
@@ -346,6 +313,39 @@ terraform plan
 ```
 terraform apply
 ```
+
+## File structure
+```
+root/
+├── main.tf
+├── variales.tf
+├── outputs.tf
+├── providers.tf
+├── random.tf
+├── install-apache.sh
+└── modules/
+    ├── database/
+    │   ├── variables.tf
+    │   ├── outputs.tf
+    │   └── main.tf
+    ├── ec2_auto_scaling/
+    │   ├── variables.tf
+    │   ├── outputs.tf
+    │   └── main.tf
+    ├── load_balancer/
+    │   ├── variables.tf
+    │   ├── outputs.tf
+    │   └── main.tf
+    └── network_flow/
+        ├── variables.tf
+        ├── outputs.tf
+        ├── route-tables.tf
+        ├── security-groups.tf
+        ├── gataways
+        └── vpc.tf
+```
+The basic configuration is done in the variables.tf file in the root directory.
+The setup can be further customized by intorducing changes in the other files. 
 
 
 <!-- BEGIN_TF_DOCS -->
