@@ -1,12 +1,12 @@
 # Create security group for ALB
 resource "aws_security_group" "alb_sg" {
   # Set name and description of the security group
-  name        = var.alb_sg_name
+  name        = var.lb_security_group_name
   description = "Allow HTTP traffic"
 
   # Set the VPC ID where the security group will be created
-  vpc_id     = aws_vpc.two_tier_vpc.id
-  depends_on = [aws_vpc.two_tier_vpc]
+  vpc_id     = aws_vpc.vpc.id
+  depends_on = [aws_vpc.vpc]
 
   # Inbound Rule
   # HTTP access from anywhere
@@ -29,15 +29,15 @@ resource "aws_security_group" "alb_sg" {
 
   # Set tags for the security group
   tags = {
-    Name = var.alb_gw_tag_name
+    Name = var.lb_security_group_tag_name
   }
 }
 
 
 # Create Security Group for Auto_Scaling Group
 resource "aws_security_group" "asg_sg" {
-  name   = var.asg_sg_name
-  vpc_id = aws_vpc.two_tier_vpc.id
+  name   = var.asg_security_group_name
+  vpc_id = aws_vpc.vpc.id
 
   # Inbound Rules
   # Allow HTTP Access from ALB Security Group
@@ -68,8 +68,8 @@ resource "aws_security_group" "asg_sg" {
 
 # Create Security group for database tier
 resource "aws_security_group" "db_sg" {
-  name   = var.db_sg_name
-  vpc_id = aws_vpc.two_tier_vpc.id
+  name   = var.db_security_group_name
+  vpc_id = aws_vpc.vpc.id
 
   # Inbound Rules
   # Allow Access from Web Tier

@@ -1,22 +1,28 @@
+################################
 # Outputs Load Balancer
 ################################
-output "alb_dns" {
-  value = aws_lb.pub_sub_alb.dns_name
+output "lb_dns" {
+  value = aws_lb.lb.dns_name
+  description = "Public subnet load balancer DNS name"
 }
 
-output "alb_arn" {
-  value = aws_lb.pub_sub_alb.arn
+output "lb_arn" {
+  value = aws_lb.lb.arn
+  description = "Public subnet load balancer ARN"
 }
 
-output "alb_id" {
-  value = aws_lb.pub_sub_alb.id
+output "lb_id" {
+  value = aws_lb.lb.id
+  description = "Public subnet load balancer ID"
 }
 
-output "alb_tg_arn" {
-  value = aws_lb_target_group.alb_tg.arn
+output "lb_target_group_arn" {
+  value = aws_lb_target_group.lb_tg.arn
+  description = "Public subnet load balancer target group ARN"
 }
 
-output "alb_tg_id" {
-  value = aws_lb_target_group.alb_tg.id
+output "lb_target_group_id" {
+  value = aws_lb_target_group.lb_tg.id
+  description = "Public subnet load balancer target group ID"
 }
 

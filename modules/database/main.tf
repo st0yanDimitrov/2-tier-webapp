@@ -1,30 +1,31 @@
 # Database subnet group
 resource "aws_db_subnet_group" "db_subnet" {
-  name       = var.db_sub_name
-  subnet_ids = [var.priv_sub1_id, var.priv_sub2_id]
+  name       = var.db_subnet_name
+  subnet_ids = var.db_private_subnet_ids
 }
-
 
 # Database instance in Private Subnet 1
 resource "aws_db_instance" "db_instance" {
-  allocated_storage           = var.allocated_storage
-  storage_type                = var.storage_type
-  engine                      = var.engine
-  engine_version              = var.engine_version
-  instance_class              = var.instance_class
-  db_subnet_group_name        = var.db_sub_name
-  vpc_security_group_ids      = [var.vpc_security_group_ids]
-  parameter_group_name        = var.parameter_group_name
+  identifier                  = var.db_identifier
+  allocated_storage           = var.db_allocated_storage
+  storage_type                = var.db_storage_type
+  engine                      = var.db_engine
+  engine_version              = var.db_engine_version
+  instance_class              = var.db_instance_class
+  db_subnet_group_name        = var.db_subnet_name
+  vpc_security_group_ids      = var.db_vpc_security_group_ids
+  parameter_group_name        = var.db_parameter_group_name
   db_name                     = var.db_name
-  username                    = var.db_name
-  password                    = var.password
-  allow_major_version_upgrade = var.allow_major_version_upgrade
-  auto_minor_version_upgrade  = var.auto_minor_version_upgrade
-  backup_retention_period     = var.backup_retention_period
-  backup_window               = var.backup_window
-  maintenance_window          = var.maintenance_window
-  multi_az                    = var.multi_az
-  skip_final_snapshot         = var.skip_final_snapshot
-  
+  username                    = var.db_username
+  password                    = var.db_password
+  allow_major_version_upgrade = var.db_allow_major_version_upgrade
+  auto_minor_version_upgrade  = var.db_auto_minor_version_upgrade
+  backup_retention_period     = var.db_backup_retention_period
+  backup_window               = var.db_backup_window
+  maintenance_window          = var.db_maintenance_window
+  multi_az                    = var.db_multi_az
+  skip_final_snapshot         = var.db_skip_final_snapshot
+
+  # Ensure that DB subet is created first
   depends_on = [aws_db_subnet_group.db_subnet]
 }

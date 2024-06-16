@@ -2,63 +2,82 @@
 #Auto Scaling Group Variables
 #####################################
 variable "asg_name" {
-  default = "two tier asg"
   type    = string
+  description = "Name of the auto scaling group"
 }
 
-variable "asg_min" {
+variable "asg_min_hosts" {
   type    = number
-  default = 2
+  description = "Minimum number of hosts in the auto scaling group"
 }
 
-variable "asg_max" {
+variable "asg_max_hosts" {
   type    = number
-  default = 5
+  description = "Maximum number of hosts in the auto scaling group"
 }
 
-variable "asg_des_cap" {
+variable "asg_desired_capacity" {
   type        = number
-  description = "ASG Desired Capacity"
-  default     = 2
+  description = "Desired number of hosts in the auto scaling group"
 }
 
-variable "pub_sub1_id" {}
-variable "pub_sub2_id" {}
+variable "public_subnet_ids" {
+  type = list(string)
+  description = "List of public subnets"
+}
 
-variable "asg_tag_name" {
-  default = "two tier asg"
+variable "asg_tag_name_value" {
   type    = string
+  description = "Name tag value of the auto scaling group"
 }
 
 #Launch Template
-variable "lt_asg_name" {
-  default = "two-tier-lt-asg"
+variable "asg_launch_template_name" {
   type    = string
+  description = "Name of the launch template"
 }
 
-variable "lt_asg_ami" {
+variable "asg_launch_template_ami" {
   type        = string
-  description = "Amazon Linux 2 Ami ID"
-  default     = "ami-06b09bfacae1453cb"
+  description = "AMI used for the EC2 instances"
 }
 
-variable "lt_asg_instance_type" {
+variable "asg_instance_type" {
   type    = string
-  default = "t2.micro"
+  description = "EC2 instance type for the auto scaling group"
 }
 
-variable "lt_asg_key" {
-  type        = string
-  description = "Key Pair"
-  default     = "week22"
+variable "asg_security_group_id" {
+  type = string
+  description = "ID of the auto scaling group security group"
 }
 
-variable "asg_sg_id" {}
-
-variable "script_name" {
+variable "user_data_script_name" {
   type        = string
   description = "User Data Script"
-  default     = "install-apache.sh"
 }
 
-variable "alb_tg_arn" {}
+variable "load_balancer_target_group_arn" {
+  type = string
+  description = "ARN of the auto scaling group target group"
+}
+
+variable "user_data_db_username" {
+  type = string
+  description = "Database master user"
+}
+
+variable "user_data_db_password" {
+  type = string
+  description = "Database master password"
+}
+
+variable "user_data_db_instance_name" {
+  type = string
+  description = "Database instance name"
+}
+
+variable "user_data_rds_endpoint" {
+  type = string
+  description = "RDS endpoint address"
+}

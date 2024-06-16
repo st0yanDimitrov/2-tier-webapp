@@ -1,147 +1,116 @@
 #####################################
 #VPC Variables
 #####################################
-variable "vpc_cidr" {
-  default = "10.0.0.0/16"
-  type    = string
-}
-
-variable "vpc_instance_tenancy" {
-  default = "default"
-  type    = string
-}
-
-variable "enable_dns_hostnames" {
-  default = true
-  type    = bool
-}
-
 variable "vpc_name" {
-  default = "Two Tier VPC"
   type    = string
+  description = "VPC name"
+}
+
+variable "vpc_cidr" {
+  type    = string
+  description = "VPC CIDR"
+}
+
+variable "vpc_enable_instance_tenancy" {
+  type    = string
+  description = "Enable instance tenancy option"
+}
+
+variable "vpc_enable_dns_hostnames" {
+  type    = bool
+  description = "Enable dns hostnames option"
 }
 
 #####################################
 #Public and Private Subnets Variables
 #####################################
-variable "pub_sub1_cidr" {
-  default = "10.0.1.0/24"
-  type    = string
-}
-
-variable "pub_sub2_cidr" {
-  default = "10.0.2.0/24"
-  type    = string
-}
-
-variable "priv_sub1_cidr" {
-  default = "10.0.3.0/24"
-  type    = string
-}
-
-variable "priv_sub2_cidr" {
-  default = "10.0.4.0/24"
-  type    = string
-}
 
 variable "map_public_ip" {
-  default = "true"
   type    = bool
+  description = "Enable map public ip option"
 }
 
-variable "pub_sub1_name" {
-  default = "Two Tier Public Subnet 1"
+variable "public_subnet1_name" {
   type    = string
+  description = "Public subnet 1 name"
 }
 
-variable "pub_sub2_name" {
-  default = "Two Tier Public Subnet 2"
+variable "public_subnet2_name" {
   type    = string
+  description = "Piblic subnet 2 name"
 }
 
-variable "priv_sub1_name" {
-  default = "Two Tier Private Subnet 1"
+variable "private_subnet1_name" {
   type    = string
+  description = "Private subnet 1 name"
 }
 
-variable "priv_sub2_name" {
-  default = "Two Tier Private Subnet 2"
+variable "private_subnet2_name" {
   type    = string
+  description = "Private subnet 2 name"
 }
 
 #####################################
 #Availability Zone Variables
 #####################################
 variable "az_1" {
-  default = "us-east-1a"
   type    = string
+  description = "Availability zone 1 (within the selected region)"
 }
 
 variable "az_2" {
-  default = "us-east-1b"
   type    = string
+  description = "Availability zone 2 (within the selected region)"
 }
 
 #####################################
 #Route Table Variables
 #####################################
-variable "pub_rt_cidr" {
-  type        = string
-  description = "CIDR block to route traffic from anywhere to internet gateway"
-  default     = "0.0.0.0/0"
-}
-
-variable "priv_rt_cidr" {
-  type        = string
-  description = "CIDR block to route taffic from private subnet to natgateway"
-  default     = "0.0.0.0/0"
-}
-
-variable "pub_rt_name" {
-  default = "Two Tier Public Route Table"
+variable "public_route_table_name" {
   type    = string
+  description = "Public route table (public subnet to internet gateway) name"
 }
 
-variable "priv_rt_name" {
-  default = "Two Tier Private Route Table"
+variable "private_route_table_name" {
   type    = string
+  description = "Private route table (private subnet to NAT gateway) name"
 }
 
 #####################################
 #Gateway Variables
 #####################################
-variable "igw_name" {
-  default = "Two Tier Internet Gatway"
+variable "internet_gateway_name" {
   type    = string
+  description = "Internet gateway name"
 }
 
-variable "nat_gw_name" {
-  default = "Two Tier NAT Gateway"
+variable "nat_gateway_name" {
   type    = string
+  description = "NAT gateway name"
 }
 
 #####################################
 #Application Load Balancer Variables
 #####################################
-variable "alb_sg_name" {
+variable "lb_security_group_name" {
   type    = string
-  default = "two tier alb_sg"
+  description = "Load balancer security group name"
 }
 
-variable "alb_gw_tag_name" {
-  default = "two tier nat_gateway"
+variable "lb_security_group_tag_name" {
   type    = string
+  description = "Load balancer security group tag Name value"
 }
 
 #####################################
 #ASG & Database Security Group Variables
 #####################################
-variable "asg_sg_name" {
+variable "asg_security_group_name" {
   type    = string
-  default = "two tier asg_sg"
+  description = "Auto scaling group security group name"
 }
 
-variable "db_sg_name" {
+variable "db_security_group_name" {
   type    = string
-  default = "two tier db_sg"
+  description = "Database security group name"
 }

@@ -1,29 +1,29 @@
 # Creates a public route table with a default route to the internet gateway
 resource "aws_route_table" "pub_rt" {
-  vpc_id = aws_vpc.two_tier_vpc.id
+  vpc_id = aws_vpc.vpc.id
 
   # Create a default route for the internet gateway with destination 0.0.0.0/0
   route {
-    cidr_block = var.pub_rt_cidr
-    gateway_id = aws_internet_gateway.two_tier_igw.id
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
   }
 
   tags = {
-    Name = var.pub_rt_name
+    Name = var.public_route_table_name
   }
 }
 
 # Creates a private route table with a default route to the NAT gateway
 resource "aws_route_table" "priv_rt" {
-  vpc_id = aws_vpc.two_tier_vpc.id
+  vpc_id = aws_vpc.vpc.id
 
   route {
-    cidr_block = var.priv_rt_cidr
-    gateway_id = aws_nat_gateway.two_tier_ngw.id
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.ngw.id
   }
 
   tags = {
-    Name = var.priv_rt_name
+    Name = var.private_route_table_name
   }
 }
 

@@ -1,71 +1,97 @@
-#Instance Module
+# Instance Module
 module "auto_scaling_group" {
-  source               = "./modules/ec2_auto_scaling"
-  pub_sub1_id          = module.network_flow.pub_sub1_id
-  pub_sub2_id          = module.network_flow.pub_sub2_id
-  lt_asg_ami           = "ami-06b09bfacae1453cb"
-  lt_asg_instance_type = "t2.micro"
-  lt_asg_key           = "week22"
-  script_name          = "install-apache.sh"
-  asg_sg_id            = module.network_flow.asg_sg_id
-  alb_tg_arn           = module.load_balancer.alb_tg_arn
+  source                                 = "./modules/ec2_auto_scaling"
+  asg_name                               = var.application_name
+  asg_instance_type                      = "t2.micro"
+  asg_min_hosts                          = 2
+  asg_max_hosts                          = 6
+  asg_desired_capacity                   = 2
+  asg_tag_name_value                     = var.application_name
+  asg_launch_template_name               = format("%s-launch-template", var.application_name)
+  asg_launch_template_ami                = "ami-06b09bfacae1453cb"
+  asg_security_group_id                  = module.network_flow.asg_security_group_id
+  user_data_script_name                  = "install-apache.sh"
+  public_subnet_ids                      = [module.network_flow.public_subnet1_id, module.network_flow.public_subnet2_id]
+  load_balancer_target_group_arn         = module.load_balancer.lb_target_group_arn
+  
+  # DB patameters for the user data script
+  user_data_rds_endpoint                 = module.database.rds_endpoint
+  user_data_db_username                  = var.db_username
+  user_data_db_password                  = local.db_password
+  user_data_db_instance_name             = module.database.db_instance_name
 }
 
-#Load Balancer Module
+# Load Balancer Module
 module "load_balancer" {
-  source                = "./modules/load_balancer"
-  pub_sub1_id           = module.network_flow.pub_sub1_id
-  pub_sub2_id           = module.network_flow.pub_sub2_id
-  alb_sg_id             = module.network_flow.alb_sg_id
-  tg_port               = 80
-  tg_protocol           = "HTTP"
-  vpc_id                = module.network_flow.vpc_id
-  alb_hc_interval       = 60
-  alb_hc_path           = "/"
-  alb_hc_port           = 80
-  alb_hc_timeout        = 45
-  alb_hc_protocol       = "HTTP"
-  alb_hc_matcher        = "200,202"
-  alb_listener_port     = "80"
-  alb_listener_protocol = "HTTP"
+  source                                 = "./modules/load_balancer"
+  lb_name                                = format("%s-public-lb", var.application_name)
+  lb_tag_value                           = format("%s-public-lb", var.application_name)
+  lb_public_subnet_ids                   = [module.network_flow.public_subnet1_id, module.network_flow.public_subnet2_id]
+  lb_security_group_id                   = module.network_flow.lb_security_group_id
+  lb_health_check_interval               = 60
+  lb_health_check_path                   = "/index.php"
+  lb_health_check_port                   = 80
+  lb_health_check_timeout                = 45
+  lb_health_check_protocol               = "HTTP"
+  lb_health_check_matcher                = "200,202"
+  lb_listener_port                       = 80
+  lb_listener_protocol                   = "HTTP"
+  lb_target_group_name                   = format("%s-target-group", var.application_name)
+  lb_target_group_port                   = 80
+  lb_target_group_protocol               = "HTTP"
+  lb_target_group_vpc_id                 = module.network_flow.vpc_id
+  lb_target_group_sticky_cookie_name     = format("%s-sticky-cookie", var.application_name)
+  lb_target_group_sticky_type            = "lb_cookie"
+  lb_target_group_sticky_cookie_duration = 600
 }
 
-#VPC Module
+# VPC Module
 module "network_flow" {
-  source         = "./modules/network_flow"
-  vpc_cidr       = var.pm_vpc_cidr
-  pub_sub1_cidr  = "10.0.1.0/24"
-  pub_sub2_cidr  = "10.0.2.0/24"
-  priv_sub1_cidr = "10.0.3.0/24"
-  priv_sub2_cidr = "10.0.4.0/24"
-  map_public_ip  = true
-  az_1           = "us-east-1a"
-  az_2           = "us-east-1b"
-  pub_rt_cidr    = "0.0.0.0/0"
-  priv_rt_cidr   = "0.0.0.0/0"
+  source                                 = "./modules/network_flow"
+  vpc_name                               = format("%s-vpc", var.application_name)
+  vpc_cidr                               = "10.0.0.0/16"
+  vpc_enable_instance_tenancy            = "default"
+  vpc_enable_dns_hostnames               = true
+  az_1                                   = var.az_1
+  az_2                                   = var.az_2
+  public_subnet1_name                    = format("%s-public-subnet1", var.application_name)
+  public_subnet2_name                    = format("%s-public-subnet2", var.application_name)
+  map_public_ip                          = true
+  private_subnet1_name                   = format("%s-private-subnat1", var.application_name)
+  private_subnet2_name                   = format("%s-private-subnet2", var.application_name)
+  public_route_table_name                = format("%s-public-route-table", var.application_name)
+  private_route_table_name               = format("%s-private-route-table", var.application_name)
+  internet_gateway_name                  = format("%s-internet-gateway", var.application_name)
+  nat_gateway_name                       = format("%s-nat-gateway", var.application_name)
+  lb_security_group_name                 = format("%s-security-group", var.application_name)
+  lb_security_group_tag_name             = format("%s-lb-security-group", var.application_name)
+  asg_security_group_name                = format("%s-asg", var.application_name)
+  db_security_group_name                 = format("%s-target-group", var.application_name)
+
 }
 
 
-#Data Module
+# Database Module
 module "database" {
-  source                      = "./modules/database"
-  priv_sub1_id                 = module.network_flow.priv_sub1_id
-  priv_sub2_id                 = module.network_flow.priv_sub2_id
-  allocated_storage           = 5
-  storage_type                = "gp2"
-  engine                      = "mysql"
-  engine_version              = "5.7"
-  instance_class              = "db.t2.micro"
-  vpc_security_group_ids      = module.network_flow.db_sg_id
-  parameter_group_name        = "default.mysql5.7"
-  username                    = "two_tier_db"
-  db_name                     = var.db_username
-  password                    = var.db_password
-  allow_major_version_upgrade = true
-  auto_minor_version_upgrade  = true
-  backup_retention_period     = 35
-  backup_window               = "22:00-23:00"
-  maintenance_window          = "Sat:00:00-Sat:03:00"
-  multi_az                    = "false"
-  skip_final_snapshot         = true
+  source                                 = "./modules/database"
+  db_identifier                          = format("%s-database", var.application_name)
+  db_subnet_name                         = format("%s-db-subnet", var.application_name)
+  db_private_subnet_ids                  = [module.network_flow.private_subnet1_id, module.network_flow.private_subnet2_id]
+  db_allocated_storage                   = 5
+  db_storage_type                        = "gp2"
+  db_engine                              = "mysql"
+  db_engine_version                      = "8.0.35"
+  db_instance_class                      = "db.t3.micro"
+  db_vpc_security_group_ids              = [module.network_flow.db_security_group_id]
+  db_parameter_group_name                = "default.mysql8.0"
+  db_name                                = var.db_name
+  db_username                            = var.db_username
+  db_password                            = local.db_password
+  db_allow_major_version_upgrade         = true
+  db_auto_minor_version_upgrade          = true
+  db_backup_retention_period             = 35
+  db_backup_window                       = "22:00-23:00"
+  db_maintenance_window                  = "Sat:00:00-Sat:03:00"
+  db_multi_az                            = true
+  db_skip_final_snapshot                 = true
 }
