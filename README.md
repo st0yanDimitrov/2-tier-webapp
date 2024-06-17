@@ -350,6 +350,7 @@ root/
 * root/variables.tf - the basic configuration is done here*
 * root/setup-script.sh - deploys Apache and a simple PHP web application together with its database connection configuration
 * root/random.tf - generates a random string to be used as database master password
+
 *The setup can be further customized by intorducing changes in the other files
 
 
