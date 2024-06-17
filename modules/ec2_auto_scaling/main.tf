@@ -1,11 +1,12 @@
 # Create an autoscaling group with the specified configurations
 resource "aws_autoscaling_group" "asg" {
-  name                = var.asg_name
-  min_size            = var.asg_min_hosts
-  max_size            = var.asg_max_hosts
-  desired_capacity    = var.asg_desired_capacity
-  vpc_zone_identifier = var.public_subnet_ids
-  health_check_type   = var.asg_health_check_type
+  name                      = var.asg_name
+  min_size                  = var.asg_min_hosts
+  max_size                  = var.asg_max_hosts
+  desired_capacity          = var.asg_desired_capacity
+  vpc_zone_identifier       = var.public_subnet_ids
+  health_check_type         = var.asg_health_check_type
+  health_check_grace_period = 30
   launch_template {
     id = aws_launch_template.lt_asg.id
   }
