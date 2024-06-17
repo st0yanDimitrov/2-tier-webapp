@@ -324,7 +324,7 @@ root/
 ├── outputs.tf
 ├── providers.tf
 ├── random.tf
-├── install-apache.sh
+├── setup-script.sh
 └── modules/
     ├── database/
     │   ├── variables.tf
@@ -346,8 +346,11 @@ root/
         ├── gataways
         └── vpc.tf
 ```
-The basic configuration is done in the variables.tf file in the root directory.
-The setup can be further customized by intorducing changes in the other files. 
+#### Key files
+* root/variables.tf - the basic configuration is done here*
+* root/setup-script.sh - deploys Apache and a simple PHP web application together with its database connection configuration
+* root/random.tf - generates a random string to be used as database master password
+*The setup can be further customized by intorducing changes in the other files
 
 
 <!-- BEGIN_TF_DOCS -->
