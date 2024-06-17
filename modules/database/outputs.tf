@@ -18,7 +18,7 @@ output "db_subnet_group_arn" {
 ################################
 output "db_instance_id" {
   value = aws_db_instance.db_instance.id
-  description = "Databse instance ID"
+  description = "Database instance ID"
 }
 
 output "db_instance_name" {
