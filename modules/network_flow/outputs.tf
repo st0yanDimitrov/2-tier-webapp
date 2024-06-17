@@ -43,7 +43,7 @@ output "public_route_table_id" {
   description = "Public route table ID"
 }
 
-output "private_routetable_id" {
+output "private_route_table_id" {
   value = aws_route_table.priv_rt.id
   description = "Private route table ID"
 }

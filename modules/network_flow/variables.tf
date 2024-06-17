@@ -37,7 +37,7 @@ variable "public_subnet1_name" {
 
 variable "public_subnet2_name" {
   type    = string
-  description = "Piblic subnet 2 name"
+  description = "Public subnet 2 name"
 }
 
 variable "private_subnet1_name" {

@@ -14,7 +14,7 @@ module "auto_scaling_group" {
   public_subnet_ids                      = [module.network_flow.public_subnet1_id, module.network_flow.public_subnet2_id]
   load_balancer_target_group_arn         = module.load_balancer.lb_target_group_arn
   
-  # DB patameters for the user data script
+  # DB parameters for the user data script
   user_data_rds_endpoint                 = module.database.rds_endpoint
   user_data_db_username                  = var.db_username
   user_data_db_password                  = local.db_password
@@ -56,7 +56,7 @@ module "network_flow" {
   public_subnet1_name                    = format("%s-public-subnet1", var.application_name)
   public_subnet2_name                    = format("%s-public-subnet2", var.application_name)
   map_public_ip                          = true
-  private_subnet1_name                   = format("%s-private-subnat1", var.application_name)
+  private_subnet1_name                   = format("%s-private-subnet1", var.application_name)
   private_subnet2_name                   = format("%s-private-subnet2", var.application_name)
   public_route_table_name                = format("%s-public-route-table", var.application_name)
   private_route_table_name               = format("%s-private-route-table", var.application_name)

@@ -52,7 +52,7 @@ No modules.
 | <a name="input_private_subnet2_name"></a> [private\_subnet2\_name](#input\_private\_subnet2\_name) | Private subnet 2 name | `string` | n/a | yes |
 | <a name="input_public_route_table_name"></a> [public\_route\_table\_name](#input\_public\_route\_table\_name) | Public route table (public subnet to internet gateway) name | `string` | n/a | yes |
 | <a name="input_public_subnet1_name"></a> [public\_subnet1\_name](#input\_public\_subnet1\_name) | Public subnet 1 name | `string` | n/a | yes |
-| <a name="input_public_subnet2_name"></a> [public\_subnet2\_name](#input\_public\_subnet2\_name) | Piblic subnet 2 name | `string` | n/a | yes |
+| <a name="input_public_subnet2_name"></a> [public\_subnet2\_name](#input\_public\_subnet2\_name) | Public subnet 2 name | `string` | n/a | yes |
 | <a name="input_vpc_cidr"></a> [vpc\_cidr](#input\_vpc\_cidr) | VPC CIDR | `string` | n/a | yes |
 | <a name="input_vpc_enable_dns_hostnames"></a> [vpc\_enable\_dns\_hostnames](#input\_vpc\_enable\_dns\_hostnames) | Enable dns hostnames option | `bool` | n/a | yes |
 | <a name="input_vpc_enable_instance_tenancy"></a> [vpc\_enable\_instance\_tenancy](#input\_vpc\_enable\_instance\_tenancy) | Enable instance tenancy option | `string` | n/a | yes |
@@ -66,7 +66,7 @@ No modules.
 | <a name="output_db_security_group_id"></a> [db\_security\_group\_id](#output\_db\_security\_group\_id) | Database security group ID |
 | <a name="output_internet_gateway_id"></a> [internet\_gateway\_id](#output\_internet\_gateway\_id) | Internet gateway ID |
 | <a name="output_lb_security_group_id"></a> [lb\_security\_group\_id](#output\_lb\_security\_group\_id) | Load balancer security group ID |
-| <a name="output_private_routetable_id"></a> [private\_routetable\_id](#output\_private\_routetable\_id) | Private route table ID |
+| <a name="output_private_route_table_id"></a> [private\_route\_table\_id](#output\_private\_route\_table\_id) | Private route table ID |
 | <a name="output_private_subnet1_id"></a> [private\_subnet1\_id](#output\_private\_subnet1\_id) | Private subnet 1 ID |
 | <a name="output_private_subnet2_id"></a> [private\_subnet2\_id](#output\_private\_subnet2\_id) | Private subnet 2 ID |
 | <a name="output_public_route_table_id"></a> [public\_route\_table\_id](#output\_public\_route\_table\_id) | Public route table ID |

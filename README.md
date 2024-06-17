@@ -23,7 +23,7 @@ Multi-AZ MySQL RDS instance for high availability.
 
 **Application Load Balancer (ALB):** Routes incoming traffic to healthy web servers and enables session affinity.
 
-**Auto Scaling Group (ASG):** Automatically manages web server instances based on scaling policies and ALB healthchecks.
+**Auto Scaling Group (ASG):** Automatically manages web server instances based on scaling policies and ALB health checks.
 
 **EC2 Instances:** Run the web application on these instances.
 
@@ -320,7 +320,7 @@ terraform apply
 ```
 root/
 ├── main.tf
-├── variales.tf
+├── variables.tf
 ├── outputs.tf
 ├── providers.tf
 ├── random.tf

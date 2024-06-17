@@ -19,12 +19,12 @@ variable "db_private_subnet_ids" {
 
 variable "db_identifier" {
   type = string
-  description = "Databse instance identifier"
+  description = "Database instance identifier"
 }
 
 variable "db_allocated_storage" {
   type = number
-  description = "Database instance inital storage allocation"
+  description = "Database instance initial storage allocation"
 }
 
 variable "db_storage_type" {
@@ -49,12 +49,12 @@ variable "db_instance_class" {
 
 variable "db_vpc_security_group_ids" {
   type = list(string)
-  description = "List of security groups for the databse instance"
+  description = "List of security groups for the database instance"
 }
 
 variable "db_parameter_group_name" {
   type = string
-  description = "Parameter group associated with this databse instanc"
+  description = "Parameter group associated with this database instance"
 }
 
 variable "db_name" {

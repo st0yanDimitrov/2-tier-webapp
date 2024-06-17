@@ -26,6 +26,6 @@ resource "aws_db_instance" "db_instance" {
   multi_az                    = var.db_multi_az
   skip_final_snapshot         = var.db_skip_final_snapshot
 
-  # Ensure that DB subet is created first
+  # Ensure that DB subnet is created first
   depends_on = [aws_db_subnet_group.db_subnet]
 }
